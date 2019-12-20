@@ -65,7 +65,8 @@ class OpenFileAction(FileAction):
             # cache and ensuring we can copy the file
             # if we need to
             try:
-                FileAction.create_folders(new_ctx)
+                #FileAction.create_folders(new_ctx)
+                pass
             except Exception, e:
                 QtGui.QMessageBox.critical(parent_ui, "Failed to create folders!", 
                                            "Failed to create folders:\n\n%s!" % e)
