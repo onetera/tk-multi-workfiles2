@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Shotgun Software Inc.
+# Copyright (c) 2020 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
 #
@@ -8,19 +8,15 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-import os
-import hou
-
 import sgtk
-
-from tank_vendor import six
 
 HookClass = sgtk.get_hook_baseclass()
 
 
 class SceneOperation(HookClass):
     """
-    Hook called to perform an operation with the current scene
+    Hook called to perform an operation with the
+    current scene
     """
 
     def execute(
@@ -67,18 +63,6 @@ class SceneOperation(HookClass):
                                 all others     - None
         """
 
-        if operation == "current_path":
-            return str(hou.hipFile.name())
-        elif operation == "open":
-            # give houdini forward slashes
-            file_path = file_path.replace(os.path.sep, "/")
-            hou.hipFile.load(six.ensure_str(file_path))
-        elif operation == "save":
-            hou.hipFile.save()
-        elif operation == "save_as":
-            # give houdini forward slashes
-            file_path = file_path.replace(os.path.sep, "/")
-            hou.hipFile.save(six.ensure_str(file_path))
-        elif operation == "reset":
-            hou.hipFile.clear()
-            return True
+        # Mari doesn't have any scene operations, since it only works with the context change mode.
+        # However workfiles does require that it can find the hook, so this is a placeholder hook.
+        pass
